@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -23,9 +25,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
+        
+        Route::bind('username', static function($value){
+           return User::where('username', $value)->first() ?? abort(Response::HTTP_NOT_FOUND);
+        });
     }
 
     /**

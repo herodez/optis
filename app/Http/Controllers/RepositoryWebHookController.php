@@ -11,7 +11,7 @@ class RepositoryWebHookController extends Controller
 {
     public function gitlab(Request $request, User $user)
     {
-        if ($request->header(' X-Gitlab-Token') !== 'test') {
+        if ($request->header('X-Gitlab-Token') !== $user->api_key) {
             abort(Response::HTTP_UNAUTHORIZED);
         }
         

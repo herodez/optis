@@ -25,3 +25,9 @@ Route::get('/include/{packageInfo}.json', 'RepositoryController@getPackagesList'
 Route::get('/repository/dist/{packageFile}', 'RepositoryController@getPackageFile')
     ->where('packageFile', '.*');
 
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/settings', 'HomeController@settings')->name('settings');
+Route::get('/my-packages', 'HomeController@myPackages')->name('my-packages');
+Route::get('/profile', 'HomeController@profile')->name('profile');
