@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
-Route::post('/update-packages', 'RepositoryController@updatePackageInformation');
-Route::get('/get-config-file', 'RepositoryController@getConfigFile');
+Route::post('/update-packages', 'RepositoryApiController@updatePackageInformation');
+Route::get('/get-config-file', 'RepositoryApiController@getConfigFile');

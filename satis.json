@@ -1,11 +1,6 @@
 {
   "name": "Optime private composer repository",
   "homepage": "http://packages.example.org",
-  "repositories": [
-    { "type": "vcs", "url": "http://optgit.optimeconsulting.net:8090/internal/optime_sdk_bills_central.git" },
-    { "type": "vcs", "url": "http://optgit.optimeconsulting.net:8090/component/optime_sso_server.git" },
-    { "type": "vcs", "url": "http://optgit.optimeconsulting.net:8090/component/optime_sso_dna_library"}
-  ],
   "config":{
     "secure-http":false
   },
@@ -13,7 +8,7 @@
   "archive": {
     "directory": "dist",
     "format": "tar",
-    "prefix-url": "http://satis.test/web",
+    "prefix-url": "http://optis.test/repository",
     "skip-dev": true
   }
 }

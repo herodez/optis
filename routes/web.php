@@ -16,4 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/packages.json', 'RepositoryController@getPackageConfig');
-Route::get('/include/{packageInfo}.json', 'RepositoryController@getPackages');
+Route::get('/include/{packageInfo}.json', 'RepositoryController@getPackagesList');
+Route::get('/repository/dist/{packageFile}', 'RepositoryController@getPackageFile')
+    ->where('packageFile', '.*');
+

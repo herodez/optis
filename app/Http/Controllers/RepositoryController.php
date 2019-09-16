@@ -3,23 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\PackageInfo;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 class RepositoryController extends Controller
 {
-    public function getConfigFile(Request $request)
+    public function __construct()
     {
-        if ($request->get('api-key') !== 'prueba') {
-            return abort(Response::HTTP_UNAUTHORIZED);
-        }
-    
-        $configFile = json_decode(file_get_contents(base_path('satis.json')), true);
-        $configFile['repositories'] = [
-            ['type' => 'vcs', 'url' => 'http://optgit.optimeconsulting.net:8090/internal/optime_sdk_bills_central.git']
-        ];
-        
-        return $configFile;
+        $this->middleware('composer.access.control');
     }
     
     public function getPackageConfig()
@@ -42,30 +33,18 @@ class RepositoryController extends Controller
         return $repositoryInitInformation;
     }
     
-    public function getPackages(PackageInfo $packageInfo)
+    public function getPackagesList(PackageInfo $packageInfo)
     {
         return response($packageInfo->content)->header('Content-Type', 'application/json');
     }
     
-    public function updatePackageInformation(Request $request)
+    public function getPackageFile($packageFile)
     {
-        $data = json_decode($request->getContent(), true);
-        $apiKey = $data['api-key'];
-        
-        if ($apiKey !== 'prueba') {
-           return abort(Response::HTTP_UNAUTHORIZED);
+        $filePath = "repository/dist/{$packageFile}";
+        if(!Storage::exists($filePath)){
+            return abort(Response::HTTP_NOT_FOUND);
         }
         
-        $packageData = $data['repo'];
-        $packageInfo = PackageInfo::where('hash', $packageData['hash'])->first();
-        if(!$packageInfo) {
-            $packageInfo = new PackageInfo();
-            $packageInfo->content = $packageData['content'];
-            $packageInfo->hash = $packageData['hash'];
-            $packageInfo->algo = $packageData['algo'];
-            $packageInfo->save();
-        }
-        
-        return 'Packages update';
+        return Storage::download($filePath);
     }
 }
