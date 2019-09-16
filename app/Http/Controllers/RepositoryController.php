@@ -18,7 +18,7 @@ class RepositoryController extends Controller
         $packageInfo = PackageInfo::orderBy('created_at', 'desc')->first();
         
         if (!$packageInfo) {
-            return abort(Response::HTTP_NOT_FOUND);
+            abort(Response::HTTP_NOT_FOUND);
         }
         
         $repositoryInitInformation = [
@@ -42,7 +42,7 @@ class RepositoryController extends Controller
     {
         $filePath = "repository/dist/{$packageFile}";
         if(!Storage::exists($filePath)){
-            return abort(Response::HTTP_NOT_FOUND);
+            abort(Response::HTTP_NOT_FOUND);
         }
         
         return Storage::download($filePath);

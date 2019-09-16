@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function (){
+//    event(new \App\Events\RepositoryUpdated());
+    abort(404);
+});
+
 Route::get('/packages.json', 'RepositoryController@getPackageConfig');
 Route::get('/include/{packageInfo}.json', 'RepositoryController@getPackagesList');
 Route::get('/repository/dist/{packageFile}', 'RepositoryController@getPackageFile')

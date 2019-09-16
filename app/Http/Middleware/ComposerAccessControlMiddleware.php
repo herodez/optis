@@ -17,7 +17,7 @@ class ComposerAccessControlMiddleware
     public function handle($request, Closure $next)
     {
         if($request->header('COMPOSER-TOKEN') !== 'test'){
-           return abort(Response::HTTP_UNAUTHORIZED) ;
+           abort(Response::HTTP_UNAUTHORIZED) ;
         }
         
         return $next($request);

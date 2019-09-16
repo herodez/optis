@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class RepositoryApiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('api.access.control');
+    }
+    
     public function getConfigFile()
     {
         $configFile = json_decode(file_get_contents(base_path('satis.json')), true);

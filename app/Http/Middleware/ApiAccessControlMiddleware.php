@@ -19,7 +19,7 @@ class ApiAccessControlMiddleware
         $apiToken = $request->get('API-TOKEN') ?? $request->header('API-TOKEN');
         
         if($apiToken !== 'prueba' ){
-            return abort(Response::HTTP_UNAUTHORIZED);
+            abort(Response::HTTP_UNAUTHORIZED);
         }
         
         return $next($request);

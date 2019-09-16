@@ -19,3 +19,4 @@ use Illuminate\Http\Request;
 
 Route::post('/update-packages', 'RepositoryApiController@updatePackageInformation');
 Route::get('/get-config-file', 'RepositoryApiController@getConfigFile');
+Route::get('/gitlab/{user}', 'RepositoryWebHookController@gitlab');
