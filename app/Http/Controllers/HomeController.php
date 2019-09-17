@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Package;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -39,5 +40,19 @@ class HomeController extends Controller
     public function myPackages()
     {
         return view('my-packages');
+    }
+    
+    public function submit()
+    {
+        return view('submit');
+    }
+    
+    public function uploadPackage(Request $request)
+    {
+        $package = new Package();
+        $package->url = $request->get('url');
+        $package->save();
+        
+        return redirect('submit');
     }
 }

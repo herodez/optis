@@ -31,3 +31,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/settings', 'HomeController@settings')->name('settings');
 Route::get('/my-packages', 'HomeController@myPackages')->name('my-packages');
 Route::get('/profile', 'HomeController@profile')->name('profile');
+Route::get('/submit', 'HomeController@submit')->name('submit');
+Route::post('/submit', 'HomeController@uploadPackage')->name('upload-package');
